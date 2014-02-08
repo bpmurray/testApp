@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns       = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "org.fishywiki.example"
+        version     = "1.0.0"
+        versionCode = "10" >
+
+   <!-- Make sure you're using the appropriate version of PhoneGap -->
+   <preference name="phonegap-version" value="3.1.0" />
+
+   <name>Brendan's sample Config.xml</name>
+
+   <description>
+        An example config.xml for online PhoneGap builds.
+   </description>
+
+   <author href="http://fishywiki.org" email="brendanpmurray@gmail.com">
+        Brendan Murray
+   </author>
+
+</widget>
+
