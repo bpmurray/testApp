@@ -8,7 +8,7 @@
    <!-- Make sure you're using the appropriate version of PhoneGap -->
    <preference name="phonegap-version" value="3.1.0" />
 
-   <name>Brendan's sample Config.xml</name>
+   <name>Brendan's Test App</name>
 
    <description>
         An example config.xml for online PhoneGap builds.
