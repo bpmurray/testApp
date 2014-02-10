@@ -30,12 +30,10 @@
       // Initialise the camera button
       $(document).ready(function() {
           $("#btnPic").click(function() {
-              alert("at photo");
               navigator.camera.getPicture(photoOK, photoFail,
 		                          { quality: 50,
                                             destinationType: Camera.DestinationType.DATA_URL
                                           }); 
-              alert("leaving photo");
           });
       });
 
@@ -49,9 +47,9 @@
          <h1 class="ui-title" id="pageTitle">Control Camera</h1>
       </div>
 
-      <span class="ui-block-a"><input id="btnPic" type="button" value="Take Picture" data-theme="e" /></span>
+      <div><span class="ui-block-a"><input id="btnPic" type="button" value="Take Picture" data-theme="e" /></span></div>
 
-      <div>i<img id="photo"/></div>
+      <div><img id="photo"/></div>
 
    </div> <!-- Page end -->
 </body>
