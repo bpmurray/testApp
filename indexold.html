@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Control Switches</title>
+
+   <meta name="HandheldFriendly" content="true" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes">
+   <meta name="apple-mobile-web-app-capable" content="yes" />
+   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+   <link rel="stylesheet" href="styles/jquery.mobile-1.3.0.min.css" />
+   <script src="script/jquery-1.10.2.min.js"></script>
+   <script src="script/jquery.mobile-1.3.0.min.js"></script>
+
+   <script type="text/javascript">
+      var dir = null;
+      var xhr = null;
+
+      //---> REPLACE THIS WITH JQUERY XHR STUFF!!!!
+      function createXHR() {
+        _xhr = null;
+        if (window.XMLHttpRequest) {
+          _xhr = new XMLHttpRequest();
+        }
+        else if (window.ActiveXObject) {
+          _xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        } 
+        return _xhr;
+      }
+
+      function getRESTURL() {
+         var pathArray = document.URL.split( '/' );
+         var newPathname = "";
+         for ( i = 0; i < pathArray.length-1; i++ ) {
+           newPathname += pathArray[i] + "/";
+         }
+         newPathName = "http://fishywiki.org/___lights/"
+         return newPathname + "tellstick.php";
+      }
+
+      function callREST(verb, url, params) {
+         var json = null;
+         xhr.open(verb, url, false);
+         if (verb === "POST") {
+            xhr.setRequestHeader("Content-Type",
+                        "application/x-www-form-urlencoded");
+         }
+         xhr.send(params);
+         if (xhr.status == 200) {
+            json = window.JSON.parse(xhr.responseText);
+         } else {
+           console.error("XHR Failed: " + xhr.statusText);
+         }
+         return json;
+      }
+
+      function getDevices() {
+         return callREST("GET", dir, null);
+      }
+
+      function turnOn(id) {
+         return callREST("POST", dir, "id=" + id);
+      }
+
+      function turnOff(id) {
+         return callREST("DELETE", dir + "?id=" + id, null);
+      }
+
+      $(document).ready(function() {
+
+          $("#btnOn").click(function() {
+              turnOn($("#deviceSelect").val());
+          });
+          $("#btnOff").click(function() {
+              turnOff($("#deviceSelect").val());
+          });
+
+          dir = getRESTURL();
+          xhr = createXHR();
+          showDevices(getDevices());
+
+      });
+
+      // This assumes that the list has specific content!
+      function showDevices(list) {
+         var title = list["0"];
+         var count = Object.keys(list).length;
+         for (var iX=1; iX<count; iX++) {
+            var elem = list[""+iX];
+            if (elem.length > 1) {
+               var id = elem.substr(0, elem.indexOf(" "));
+               var on = false;
+               if (elem.substr(elem.length-2) === "ON") {
+                  var on = true;
+               }
+               var name = elem.substr(id.length + 1, on ? elem.length - 5
+                                                        : elem.length - 6);
+               $("#deviceSelect").append($("<option value='" + id +
+                                           "'>" + name + "</option>"));
+            }
+         }
+         $("#deviceSelect").trigger("change");
+      }
+
+   </script>
+</head><body>
+   <div data-role="page" data-theme="a">
+
+      <!-- The page header -->
+      <div data-role="header" data-theme="c" class="ui-header ui-bar-a" role="banner">
+         <h1 class="ui-title" id="pageTitle">Control Devices</h1>
+      </div>
+
+
+
+      <div> 
+         <select id="deviceSelect" name="deviceSelect" data-native-menu="false" data-theme="b">
+            <option data-placeholder="true">Choose device</option>
+         </select>
+      </div>
+
+      <div> 
+         <span class="ui-grid-a">
+            <span class="ui-block-a"><input id="btnOn" type="button" value="On" dataicon-"check" data-theme="e" /></span>
+            <span class="ui-block-b"><input id="btnOff" type="button" value="Off" dataicon-"delete" data-theme="e" /></span>
+         </span>
+      </div>
+
+   </div> <!-- Page end -->
+</body>
+</html>
+
