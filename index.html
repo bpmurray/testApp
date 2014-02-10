@@ -29,12 +29,12 @@
       // Initialise the camera button
       $(document).ready(function() {
           $("#btnPic").click(function() {
+              alert("at photo");
               navigator.camera.getPicture(photoOK, photoFail,
 		                          { quality: 50,
                                             destinationType: Camera.DestinationType.DATA_URL
                                           }); 
-
-
+              alert("leaving photo");
           });
       });
 
