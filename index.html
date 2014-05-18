@@ -9,99 +9,41 @@
    <meta name="apple-mobile-web-app-capable" content="yes" />
    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
-   <link rel="stylesheet" href="styles/jquery.mobile-1.3.0.min.css" />
-   <script src="script/jquery-1.10.2.min.js"></script>
-   <script src="script/jquery.mobile-1.3.0.min.js"></script>
+   <link rel="stylesheet" href="styles/jquery.mobile-1.4.2.min.css" />
+   <script src="script/jquery-2.1.0.min.js"></script>
+   <script src="script/jquery.mobile-1.4.2.min.js"></script>
 
    <script type="text/javascript">
-      var dir = null;
-      var xhr = null;
 
-      //---> REPLACE THIS WITH JQUERY XHR STUFF!!!!
-      function createXHR() {
-        _xhr = null;
-        if (window.XMLHttpRequest) {
-          _xhr = new XMLHttpRequest();
-        }
-        else if (window.ActiveXObject) {
-          _xhr = new ActiveXObject("Microsoft.XMLHTTP");
-        } 
-        return _xhr;
+      // This function is called when the button is pressed
+      function loadData(which) {
+         // The name of the data file
+         var fname = "data" + which + ".json";
+
+         $.ajax({
+            url:           fname,
+            crossDomain:   true,
+            dataType:      "jsonp",
+            jsonpCallback: "cback",
+            timeout:       1000,
+         }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+            alert('Failed to load data.');
+         }).done(function (data) {
+            $("#contentX").html(data.content);
+         });
       }
 
-      function getRESTURL() {
-         var pathArray = document.URL.split( '/' );
-         var newPathname = "";
-         for ( i = 0; i < pathArray.length-1; i++ ) {
-           newPathname += pathArray[i] + "/";
-         }
-         newPathName = "http://fishywiki.org/___lights/"
-         return newPathname + "tellstick.php";
-      }
 
-      function callREST(verb, url, params) {
-         var json = null;
-         xhr.open(verb, url, false);
-         if (verb === "POST") {
-            xhr.setRequestHeader("Content-Type",
-                        "application/x-www-form-urlencoded");
-         }
-         xhr.send(params);
-         if (xhr.status == 200) {
-            json = window.JSON.parse(xhr.responseText);
-         } else {
-           console.error("XHR Failed: " + xhr.statusText);
-         }
-         return json;
-      }
-
-      function getDevices() {
-         return callREST("GET", dir, null);
-      }
-
-      function turnOn(id) {
-         return callREST("POST", dir, "id=" + id);
-      }
-
-      function turnOff(id) {
-         return callREST("DELETE", dir + "?id=" + id, null);
-      }
-
+      // Initialise the buttons
       $(document).ready(function() {
-
-          $("#btnOn").click(function() {
-              turnOn($("#deviceSelect").val());
+          $("#btnA").click(function() {
+             loadData("A");
           });
-          $("#btnOff").click(function() {
-              turnOff($("#deviceSelect").val());
+          $("#btnB").click(function() {
+             loadData("B");
           });
-
-          dir = getRESTURL();
-          xhr = createXHR();
-          showDevices(getDevices());
-
       });
-
-      // This assumes that the list has specific content!
-      function showDevices(list) {
-         var title = list["0"];
-         var count = Object.keys(list).length;
-         for (var iX=1; iX<count; iX++) {
-            var elem = list[""+iX];
-            if (elem.length > 1) {
-               var id = elem.substr(0, elem.indexOf(" "));
-               var on = false;
-               if (elem.substr(elem.length-2) === "ON") {
-                  var on = true;
-               }
-               var name = elem.substr(id.length + 1, on ? elem.length - 5
-                                                        : elem.length - 6);
-               $("#deviceSelect").append($("<option value='" + id +
-                                           "'>" + name + "</option>"));
-            }
-         }
-         $("#deviceSelect").trigger("change");
-      }
 
    </script>
 </head><body>
@@ -109,23 +51,15 @@
 
       <!-- The page header -->
       <div data-role="header" data-theme="c" class="ui-header ui-bar-a" role="banner">
-         <h1 class="ui-title" id="pageTitle">Control Devices</h1>
+         <h1 class="ui-title" id="pageTitle">Load Data</h1>
       </div>
 
+      <div><span class="ui-block-a">
+            <input id="btnA" type="button" value="Load Data A" data-theme="e" />
+            <input id="btnB" type="button" value="Load Data B" data-theme="e" />
+      </span></div>
 
-
-      <div> 
-         <select id="deviceSelect" name="deviceSelect" data-native-menu="false" data-theme="b">
-            <option data-placeholder="true">Choose device</option>
-         </select>
-      </div>
-
-      <div> 
-         <span class="ui-grid-a">
-            <span class="ui-block-a"><input id="btnOn" type="button" value="On" dataicon-"check" data-theme="e" /></span>
-            <span class="ui-block-b"><input id="btnOff" type="button" value="Off" dataicon-"delete" data-theme="e" /></span>
-         </span>
-      </div>
+      <div id="contentX"><div>
 
    </div> <!-- Page end -->
 </body>

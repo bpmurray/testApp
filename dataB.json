@@ -1,0 +1,7 @@
+cback(
+    {
+        "content": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+        "other": "abcdefg"
+    }
+);
+
