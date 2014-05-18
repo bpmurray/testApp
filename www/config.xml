@@ -8,13 +8,11 @@
    <!-- Make sure you're using the appropriate version of PhoneGap -->
    <preference name="phonegap-version" value="3.1.0" />
 
-<<<<<<< HEAD
    <!-- See http://docs.build.phonegap.com/en_US/3.1.0/ for the docs -->
    <name>Brendan's sample Config.xml</name>
-=======
+
    <!-- The name of your app -->
    <name>My Test App</name>
->>>>>>> a6c5befe2468a28dab9567856517b8640628cb48
 
    <!-- A description of the app -->
    <description>
