@@ -11,9 +11,9 @@
 
    <link rel="cssheet" href="css/jquery.mobile-1.4.2.min.css" />
 
-   <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-   <script type="test/javascript" src="js/jquery-2.1.0.min.js"></script>
-   <script type="test/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
+   <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+   <script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
+   <script type="text/javascript" src="cordova.js"></script>
    <script type="text/javascript" src="js/SocialSharing.js"></script>
 
    <script type="text/javascript">
@@ -39,13 +39,15 @@
 
 
       // Initialise the buttons
-      $(document).ready(function() {
-          $("#btnA").click(function() {
-             loadData("A");
-          });
-          $("#btnB").click(function() {
-             loadData("B");
-          });
+      document.addEventListener("deviceready", function() {
+         $(document).ready(function() {
+            $("#btnA").click(function() {
+               loadData("A");
+            });
+            $("#btnB").click(function() {
+               loadData("B");
+            });
+         });
       });
 
    </script>
@@ -57,25 +59,27 @@
          <h1 class="ui-title" id="pageTitle">Load Data</h1>
       </div>
 
-      <div><span class="ui-block-a">
+      <div>
+         <span class="ui-block-a">
             <input id="btnA" type="button" value="Load Data A" data-theme="e" />
             <input id="btnB" type="button" value="Load Data B" data-theme="e" />
-      </span></div>
+         </span>
+      </div>
 
       <div id="contentX"><div>
       <br />
       <br />
       <br />
       <div id="buttons">
-         <button onclick="window.plugins.socialsharing.share('Message only')">message only</button>
-         <button onclick="window.plugins.socialsharing.share('Message and subject', 'The subject')">message and subject</button>
-         <button onclick="window.plugins.socialsharing.share(null, null, null, 'http://www.x-services.nl')">link only</button>
-         <button onclick="window.plugins.socialsharing.share('Message and link', null, null, 'http://www.x-services.nl')">message and link</button>
-         <button onclick="window.plugins.socialsharing.share(null, null, 'https://www.google.nl/images/srpr/logo4w.png', null)">image only</button>
-         <button onclick="window.plugins.socialsharing.share(null, null, 'data:image/png;base64,R0lGODlhDAAMALMBAP8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAUKAAEALAAAAAAMAAwAQAQZMMhJK7iY4p3nlZ8XgmNlnibXdVqolmhcRQA7', null)">base64 image only</button>
-         <button onclick="window.plugins.socialsharing.share('Message and image', null, 'https://www.google.nl/images/srpr/logo4w.png', null)">message and image</button>
-         <button onclick="window.plugins.socialsharing.share('Message, image and link', null, 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')">message, image and link</button>
-         <button onclick="window.plugins.socialsharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')">message, subject, image and link</button>
+         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message only')" value="message only" />
+         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message and subject', 'The subject')" value="message and subject" />
+         <input type="button" id="b1" onclick="window.plugins.socialsharing.share(null, null, null, 'http://www.x-services.nl')" value="link only" />
+         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message and link', null, null, 'http://www.x-services.nl')" value="message and link" />
+         <input type="button" id="b1" onclick="window.plugins.socialsharing.share(null, null, 'https://www.google.nl/images/srpr/logo4w.png', null)" value="image only" />
+         <input type="button" id="b1" onclick="window.plugins.socialsharing.share(null, null, 'data:image/png;base64,R0lGODlhDAAMALMBAP8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAUKAAEALAAAAAAMAAwAQAQZMMhJK7iY4p3nlZ8XgmNlnibXdVqolmhcRQA7', null)" value="base64 image only" />
+         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message and image', null, 'https://www.google.nl/images/srpr/logo4w.png', null)" value="message and image" />
+         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message, image and link', null, 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')" value="message, image and link" />
+         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')" value="message, subject, image and link" />
       </div>
 
    </div> <!-- Page end -->

@@ -8,76 +8,91 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes">
    <meta name="apple-mobile-web-app-capable" content="yes" />
    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-
-   <link rel="cssheet" href="css/jquery.mobile-1.4.2.min.css" />
-
-   <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-   <script type="test/javascript" src="js/jquery-2.1.0.min.js"></script>
-   <script type="test/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
-   <script type="text/javascript" src="js/SocialSharing.js"></script>
-
-   <script type="text/javascript">
-
-      // This function is called when the button is pressed
-      function loadData(which) {
-         // The name of the data file
-         var fname = "data/data" + which + ".json";
-
-         $.ajax({
-            url:           fname,
-            crossDomain:   true,
-            dataType:      "jsonp",
-            jsonpCallback: "cback",
-            timeout:       1000,
-         }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
-            alert('Failed to load data.');
-         }).done(function (data) {
-            $("#contentX").html(data.content);
-         });
-      }
-
-
-      // Initialise the buttons
-      document.addEventListener("deviceready", function () {
-         $(document).ready(function() {
-            $("#btnA").click(function() {
-               loadData("A");
-            });
-            $("#btnB").click(function() {
-               loadData("B");
-            });
-         });
-      });
+//
+//   <link rel="cssheet" href="css/jquery.mobile-1.4.2.min.css" />
+//
+//   <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+//   <script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
+//   <script type="text/javascript" src="cordova.js"></script>
+//   <script type="text/javascript" src="js/SocialSharing.js"></script>
+//
+//   <script type="text/javascript">
+/////////////////////////////////////////////////////////
+// This stuff isn't used in the test app
+//
+//
+//      // This function is called when the button is pressed
+//      function loadData(which) {
+//         // The name of the data file
+//         var fname = "data/data" + which + ".json";
+//
+//         $.ajax({
+//            url:           fname,
+//            crossDomain:   true,
+//            dataType:      "jsonp",
+//            jsonpCallback: "cback",
+//            timeout:       1000,
+//         }).fail(function (jqXHR, textStatus, errorThrown) {
+//            console.log(textStatus, errorThrown);
+//            alert('Failed to load data.');
+//         }).done(function (data) {
+//            $("#contentX").html(data.content);
+//         });
+//      }
+//
+//
+//      // Initialise the buttons
+//      document.addEventListener("deviceready", function() {
+//         $(document).ready(function() {
+//            $("#btnA").click(function() {
+//               loadData("A");
+//            });
+//            $("#btnB").click(function() {
+//               loadData("B");
+//            });
+//         });
+//      });
+/////////////////////////////////////////////////////////
 
    </script>
 </head><body>
-   <div data-role="page" data-theme="a">
+   <div data-role="page" data-theme="a" data-content-theme="a">
 
       <!-- The page header -->
       <div data-role="header" data-theme="c" class="ui-header ui-bar-a" role="banner">
-         <h1 class="ui-title" id="pageTitle">Load Data</h1>
+         <h1 class="ui-title" id="pageTitle">Test App</h1>
       </div>
 
-      <div><span class="ui-block-a">
+      <!-- This isn't used for our test
+      <div>
+         <span class="ui-block-a">
             <input id="btnA" type="button" value="Load Data A" data-theme="e" />
             <input id="btnB" type="button" value="Load Data B" data-theme="e" />
-      </span></div>
+         </span>
+      </div>
 
       <div id="contentX"><div>
-      <br />
-      <br />
-      <br />
+      -->
+
       <div id="buttons">
-         <button onclick="window.plugins.socialsharing.share('Message only')">message only</button>
-         <button onclick="window.plugins.socialsharing.share('Message and subject', 'The subject')">message and subject</button>
-         <button onclick="window.plugins.socialsharing.share(null, null, null, 'http://www.x-services.nl')">link only</button>
-         <button onclick="window.plugins.socialsharing.share('Message and link', null, null, 'http://www.x-services.nl')">message and link</button>
-         <button onclick="window.plugins.socialsharing.share(null, null, 'https://www.google.nl/images/srpr/logo4w.png', null)">image only</button>
-         <button onclick="window.plugins.socialsharing.share(null, null, 'data:image/png;base64,R0lGODlhDAAMALMBAP8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAUKAAEALAAAAAAMAAwAQAQZMMhJK7iY4p3nlZ8XgmNlnibXdVqolmhcRQA7', null)">base64 image only</button>
-         <button onclick="window.plugins.socialsharing.share('Message and image', null, 'https://www.google.nl/images/srpr/logo4w.png', null)">message and image</button>
-         <button onclick="window.plugins.socialsharing.share('Message, image and link', null, 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')">message, image and link</button>
-         <button onclick="window.plugins.socialsharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')">message, subject, image and link</button>
+         <input data-theme="a" type="button" id="b1" value="message only" 
+                onclick="window.plugins.socialsharing.share('Message only')" />
+         <input data-theme="b" type="button" id="b2" value="message and subject" 
+                onclick="window.plugins.socialsharing.share('Message and subject', 'The subject')" />
+         <input data-theme="a" type="button" id="b3" value="link only" 
+                onclick="window.plugins.socialsharing.share(null, null, null, 'http://www.x-services.nl')" />
+         <input data-theme="b" type="button" id="b4" value="message and link" 
+                onclick="window.plugins.socialsharing.share('Message and link', null, null, 'http://www.x-services.nl')" />
+         <input data-theme="a" type="button" id="b5" value="image only" 
+                onclick="window.plugins.socialsharing.share(null, null, 'https://www.google.nl/images/srpr/logo4w.png', null)" />
+         <input data-theme="b" type="button" id="b6" value="base64 image only" 
+                onclick="window.plugins.socialsharing.share(null, null, 'data:image/png;base64,R0lGODlhDAAMALMBAP8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAUKAAEALAAAAAAMAAwAQAQZMMhJK7iY4p3nlZ8XgmNlnibXdVqolmhcRQA7', null)" />
+         <input data-theme="a" type="button" id="b7" value="message and image" 
+                onclick="window.plugins.socialsharing.share('Message and image', null, 'https://www.google.nl/images/srpr/logo4w.png', null)" />
+         <input data-theme="b" type="button" id="b8" value="message, image and link" 
+                onclick="window.plugins.socialsharing.share('Message, image and link', null, 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')" />
+         <input data-theme="a" type="button" id="b9" value="message, subject, image and link" 
+                onclick="window.plugins.socialsharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')" />
       </div>
 
    </div> <!-- Page end -->
