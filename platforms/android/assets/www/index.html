@@ -9,80 +9,43 @@
    <meta name="apple-mobile-web-app-capable" content="yes" />
    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
-   <link rel="cssheet" href="css/jquery.mobile-1.4.2.min.css" />
+   <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css" />
 
    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
    <script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
    <script type="text/javascript" src="cordova.js"></script>
    <script type="text/javascript" src="js/SocialSharing.js"></script>
 
-   <script type="text/javascript">
-
-      // This function is called when the button is pressed
-      function loadData(which) {
-         // The name of the data file
-         var fname = "data/data" + which + ".json";
-
-         $.ajax({
-            url:           fname,
-            crossDomain:   true,
-            dataType:      "jsonp",
-            jsonpCallback: "cback",
-            timeout:       1000,
-         }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
-            alert('Failed to load data.');
-         }).done(function (data) {
-            $("#contentX").html(data.content);
-         });
-      }
-
-
-      // Initialise the buttons
-      document.addEventListener("deviceready", function() {
-         $(document).ready(function() {
-            $("#btnA").click(function() {
-               loadData("A");
-            });
-            $("#btnB").click(function() {
-               loadData("B");
-            });
-         });
-      });
-
-   </script>
-</head><body>
-   <div data-role="page" data-theme="a">
+</head>
+<body>
+   <div data-role="page" data-theme="b" data-content-theme="a">
 
       <!-- The page header -->
-      <div data-role="header" data-theme="c" class="ui-header ui-bar-a" role="banner">
-         <h1 class="ui-title" id="pageTitle">Load Data</h1>
+      <div data-role="header" data-theme="b" class="ui-header ui-bar-a" role="banner">
+         <h1 class="ui-title" id="pageTitle">Test App</h1>
       </div>
 
-      <div>
-         <span class="ui-block-a">
-            <input id="btnA" type="button" value="Load Data A" data-theme="e" />
-            <input id="btnB" type="button" value="Load Data B" data-theme="e" />
-         </span>
-      </div>
-
-      <div id="contentX"><div>
-      <br />
-      <br />
-      <br />
-      <div id="buttons">
-         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message only')" value="message only" />
-         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message and subject', 'The subject')" value="message and subject" />
-         <input type="button" id="b1" onclick="window.plugins.socialsharing.share(null, null, null, 'http://www.x-services.nl')" value="link only" />
-         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message and link', null, null, 'http://www.x-services.nl')" value="message and link" />
-         <input type="button" id="b1" onclick="window.plugins.socialsharing.share(null, null, 'https://www.google.nl/images/srpr/logo4w.png', null)" value="image only" />
-         <input type="button" id="b1" onclick="window.plugins.socialsharing.share(null, null, 'data:image/png;base64,R0lGODlhDAAMALMBAP8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAUKAAEALAAAAAAMAAwAQAQZMMhJK7iY4p3nlZ8XgmNlnibXdVqolmhcRQA7', null)" value="base64 image only" />
-         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message and image', null, 'https://www.google.nl/images/srpr/logo4w.png', null)" value="message and image" />
-         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message, image and link', null, 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')" value="message, image and link" />
-         <input type="button" id="b1" onclick="window.plugins.socialsharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')" value="message, subject, image and link" />
-      </div>
+      <div data-role="content" data-theme="b">
+         <a href="#" data-theme="a" data-role="button" id="b1" 
+                onclick="window.plugins.socialsharing.share('Message only')" >message only</a> 
+         <a href="#" data-theme="e" data-role="button" id="b2" 
+                onclick="window.plugins.socialsharing.share('Message and subject', 'The subject')" >message and subject</a> 
+         <a href="#" data-theme="a" data-role="button" id="b3" 
+                Onclick="window.plugins.socialsharing.share(null, null, null, 'http://www.x-services.nl')" >link only</a> 
+         <a href="#" data-theme="e" data-role="button" id="b4" 
+                onclick="window.plugins.socialsharing.share('Message and link', null, null, 'http://www.x-services.nl')" >message and link</a>
+         <a href="#" data-theme="a" data-role="button" id="b5" 
+                onclick="window.plugins.socialsharing.share(null, null, 'https://www.google.nl/images/srpr/logo4w.png', null)" >image only</a> 
+         <a href="#" data-theme="e" data-role="button" id="b6" 
+                onclick="window.plugins.socialsharing.share(null, null, 'data:image/png;base64,R0lGODlhDAAMALMBAP8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAUKAAEALAAAAAAMAAwAQAQZMMhJK7iY4p3nlZ8XgmNlnibXdVqolmhcRQA7', null)" >base64 image only</a> 
+         <a href="#" data-theme="a" data-role="button" id="b7" 
+                onclick="window.plugins.socialsharing.share('Message and image', null, 'https://www.google.nl/images/srpr/logo4w.png', null)" >message and image</a> 
+         <a href="#" data-theme="e" data-role="button" id="b8" 
+                onclick="window.plugins.socialsharing.share('Message, image and link', null, 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')" >message, image and link</a> 
+         <a href="#" data-theme="a" data-role="button" id="b9" 
+                onclick="window.plugins.socialsharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')" >message, subject, image and link</a> 
+      </div> <!-- content end -->
 
    </div> <!-- Page end -->
 </body>
 </html>
-
