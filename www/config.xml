@@ -47,6 +47,14 @@
    -->
    <!-- We'll use the camera as an example -->
    <gap:plugin name="org.apache.cordova.camera" />
+   <gap:plugin name="nl.x-services.plugins.socialsharing" />
+
+   <!-- Plugins from other sources -->
+   <!-- Socialsharing for Android -->
+   <feature name="SocialSharing">
+      <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+   </feature>
+   
 
 </widget>
 
